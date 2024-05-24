@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 
 import { useSelector } from "react-redux";
 import { SnackbarProvider } from "notistack";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 // const PrivateRoutes = () => {
 //   const { isAuth } = useSelector((state) => state.auth);
@@ -31,8 +33,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
 
           <Route>
-            {/* <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} /> */}
+            <Route path="/register" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
           </Route>
         </Routes>
