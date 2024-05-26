@@ -1,23 +1,42 @@
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import Layout from "../components/layout";
-import "./AuthCard.css";
+import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
-import { CheckBox } from "@mui/material/Checkbox";
 import { Google } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import useForm from "../hooks/useForm";
+import "./AuthCard.css";
 
 const Login = () => {
+  const [formData, handleChange] = useForm({
+    email: "",
+    password: "",
+    rememberUser: false,
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <Layout>
-      <div className="auth-card bg-light">
+      <form className="auth-card bg-light" onChange={handleChange}>
         <div className="title-wrapper">
           <AccountCircleIcon color="primary" sx={{ fontSize: "42px" }} />
           <Typography fontSize={"32px"}>Sign in</Typography>
         </div>
-        <TextField placeholder="Email or Username" fullWidth required />
-        <TextField type="password" placeholder="Password" fullWidth />
+        <TextField label="Email or Username" name="email" fullWidth required />
+        <TextField
+          type="password"
+          label="Password"
+          name="password"
+          fullWidth
+          required
+        />
         <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
+          control={
+            <Checkbox value="remember" color="primary" name="rememberUser" />
+          }
           label="Remember me"
           style={{ alignSelf: "start" }}
         />
@@ -29,7 +48,12 @@ const Login = () => {
         >
           Continue with Google
         </Button>
-        <Button type="submit" variant="contained" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          onClick={handleSubmit}
+        >
           Sign In
         </Button>
         <Grid container>
@@ -39,7 +63,7 @@ const Login = () => {
             </Link>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2">
+            <Link href="/register" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
@@ -47,7 +71,7 @@ const Login = () => {
         <Typography fontSize={"0.8rem"}>
           By continuing, you are agree to Y's Terms of use and Privacy Policy
         </Typography>
-      </div>
+      </form>
     </Layout>
   );
 };
