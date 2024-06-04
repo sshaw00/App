@@ -5,6 +5,7 @@ import { Google } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import useForm from "../hooks/useForm";
 import "./AuthCard.css";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const [formData, handleChange] = useForm({
@@ -40,14 +41,23 @@ const Login = () => {
           label="Remember me"
           style={{ alignSelf: "start" }}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<Google />}
-          fullWidth
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
         >
-          Continue with Google
-        </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<Google />}
+            fullWidth
+          >
+            Continue with Google
+          </Button>
+        </GoogleLogin>
         <Button
           type="submit"
           variant="contained"

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { SnackbarProvider } from "notistack";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // const PrivateRoutes = () => {
 //   const { isAuth } = useSelector((state) => state.auth);
@@ -27,19 +28,21 @@ import Signup from "./pages/Signup";
 
 const App = () => {
   return (
-    <SnackbarProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-
-          <Route>
-            <Route path="/register" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+    <GoogleOAuthProvider clientId="4397980195-ie0es4f203k7u5laels9kt486jt08hg1.apps.googleusercontent.com">
+      <SnackbarProvider>
+        <BrowserRouter>
+          <Routes>
             <Route path="/" element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </SnackbarProvider>
+
+            <Route>
+              <Route path="/register" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Home />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </SnackbarProvider>
+    </GoogleOAuthProvider>
   );
 };
 
